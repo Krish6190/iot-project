@@ -71,7 +71,6 @@ class _MainAppState extends State<MainApp> {
       _logger.w("User did not grant permission for notifications");
     }
 
-    // Get the FCM token
     String? token = await messaging.getToken();
     _logger.i("FCM Token: $token");
 
@@ -80,7 +79,6 @@ class _MainAppState extends State<MainApp> {
       if (message.notification != null) {
         _logger.i('Received notification: ${message.notification!.title}');
         if (mounted) {
-          // Only show dialog if widget is still mounted
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -104,7 +102,6 @@ class _MainAppState extends State<MainApp> {
     FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
   }
 
-  // Handle background messages
   Future<void> _backgroundMessageHandler(RemoteMessage message) async {
     _logger.i('Background message received: ${message.notification!.title}');
   }
