@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "179654687797",
+    "project_id": "iot-security-f59f9",
+    "storage_bucket": "iot-security-f59f9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179654687797:android:f827fa05fdde970b10857c",
+        "android_client_info": {
+          "package_name": "com.example.intruder_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeTmxetM9LATbnGG_o_kMbDex6g6RQUCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
