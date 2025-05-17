@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Firebase service account
+iots-a582d-firebase-adminsdk-fbsvc-d52486a9b5.json
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# MongoDB
+MONGODB_URI=your_mongodb_uri

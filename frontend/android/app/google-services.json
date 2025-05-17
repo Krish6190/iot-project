@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94979645801",
+    "project_id": "iots-a582d",
+    "storage_bucket": "iots-a582d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94979645801:android:3250b67324709b0b131df8",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo31xunKm-PppfQ0odrtuD6QauzkwwxTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
