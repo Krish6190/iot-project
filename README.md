@@ -4,12 +4,13 @@ A comprehensive IoT-based security monitoring system that captures images from I
 
 ## Project Overview
 
-This project consists of two main components:
+This project consists of three main components:
 
-1. **Backend Server**: Node.js/Express application that handles image uploads, storage, and push notifications
-2. **Mobile App**: Flutter-based mobile application for viewing captured images and receiving real-time alerts
+1. **Hardware**: Arduino board with ESP-CAM module and PIR sensor for motion detection and image capture
+2. **Backend Server**: Node.js/Express application that handles image uploads, storage, and push notifications
+3. **Mobile App**: Flutter-based mobile application for viewing captured images and receiving real-time alerts
 
-The system is designed for home security, allowing users to monitor their premises remotely through captured images from IoT devices like Raspberry Pi cameras or ESP32-CAM modules.
+The system is designed for home security, allowing users to monitor their premises remotely. When the PIR sensor detects motion, the ESP-CAM captures images which are then sent by the Arduino board to the backend server for processing and storage. Users receive instant notifications on their mobile devices when security events occur.
 
 ## Features
 
@@ -21,6 +22,8 @@ The system is designed for home security, allowing users to monitor their premis
 - RESTful API endpoints for image retrieval and device management
 - Real-time notification delivery when new security images are captured
 - Containerized deployment with Docker support
+- Automated image capture triggered by motion detection
+- Integration with Arduino and ESP-CAM for hardware-level security monitoring
 
 ### Frontend Features
 
@@ -53,6 +56,44 @@ The system is designed for home security, allowing users to monitor their premis
 - **Shared Preferences**: For local storage of settings
 - **Workmanager**: For background tasks
 - **Shimmer**: For loading animations
+
+## Hardware Components
+
+### Arduino Setup
+
+The project uses the following hardware components:
+
+1. **Arduino Board**: Controls the entire image capture and transmission process
+   - Receives input from the PIR sensor
+   - Triggers the ESP-CAM to take photos when motion is detected
+   - Sends captured images to the backend server
+
+2. **ESP-CAM Module**: Camera module for capturing images
+   - OV2640 camera sensor
+   - Provides high-quality images suitable for security monitoring
+   - Connected to the Arduino board for control signals
+
+3. **PIR Motion Sensor**: Passive Infrared sensor for motion detection
+   - Detects movement in the monitored area
+   - Triggers the image capture workflow
+   - Adjustable sensitivity for different environments
+
+### Hardware Workflow
+
+1. The PIR sensor continuously monitors for motion in its field of view
+2. When motion is detected, it signals the Arduino board
+3. The Arduino triggers the ESP-CAM to capture an image
+4. The image is then sent to the backend server via HTTP POST request
+5. The backend processes the image and sends notifications to registered mobile devices
+
+### Hardware Requirements
+
+- Arduino Uno/Nano/Mega or compatible board
+- ESP32-CAM module with OV2640 camera
+- PIR motion sensor (HC-SR501 or similar)
+- Power supply (5V for Arduino)
+- Connecting wires and breadboard
+- Optional: 3D printed case for housing components
 
 ## Setup Instructions
 
