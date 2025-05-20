@@ -84,6 +84,37 @@ The system is designed for home security, allowing users to monitor their premis
    npm start
    ```
 
+## Docker Setup
+
+The backend service can be easily deployed using Docker:
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Build the Docker image:
+   ```bash
+   docker build -t iot-security-backend .
+   ```
+
+3. Run the Docker container:
+   ```bash
+   docker run -p 5000:5000 --env-file .env iot-security-backend
+   ```
+   
+   This command:
+   - Maps port 5000 of the container to port 5000 on your host machine
+   - Uses environment variables from your local `.env` file
+
+4. Access the API at `http://localhost:5000`
+
+### Docker Environment
+
+- The Docker container is based on Node.js 18
+- Exposes port 5000 by default
+- Requires the same environment variables as the non-Docker setup
+
 ### Frontend Setup
 
 1. Navigate to the frontend directory:
@@ -113,13 +144,35 @@ The system is designed for home security, allowing users to monitor their premis
 
 ### Backend Environment Variables
 
-| Variable | Description |
-|----------|-------------|
-| CLOUDINARY_CLOUD_NAME | Your Cloudinary cloud name |
-| CLOUDINARY_API_KEY | Cloudinary API key |
-| CLOUDINARY_API_SECRET | Cloudinary API secret |
-| MONGODB_URI | MongoDB connection string |
-| PORT | Server port (default: 3000) |
+Create a `.env` file in the backend directory with the following variables:
+
+| Variable | Description | Required for Docker |
+|----------|-------------|-------------------|
+| CLOUDINARY_CLOUD_NAME | Your Cloudinary cloud name | Yes |
+| CLOUDINARY_API_KEY | Cloudinary API key | Yes |
+| CLOUDINARY_API_SECRET | Cloudinary API secret | Yes |
+| MONGODB_URI | MongoDB connection string | Yes |
+| PORT | Server port (default: 3000 for local, 5000 for Docker) | Yes |
+
+**Note on PORT configuration:**
+
+- For local development without Docker, the default port is 3000
+- For Docker deployments, the container exposes port 5000 by default
+- If you modify the PORT in your Docker environment, make sure to update your `docker run` command accordingly
+
+### Using Environment Variables with Docker
+
+You can pass environment variables to the Docker container in several ways:
+
+1. Using an env file:
+   ```bash
+   docker run -p 5000:5000 --env-file .env iot-security-backend
+   ```
+
+2. Directly in the command:
+   ```bash
+   docker run -p 5000:5000 -e MONGODB_URI=mongodb://uri -e PORT=5000 iot-security-backend
+   ```
 
 ### Frontend Configuration
 
@@ -143,8 +196,35 @@ The backend includes a Dockerfile for containerized deployment. You can deploy i
 ```bash
 cd backend
 docker build -t iot-security-backend .
-docker run -p 3000:3000 iot-security-backend
+docker run -p 5000:5000 --env-file .env iot-security-backend
 ```
+
+For production deployment:
+
+1. Configure appropriate environment variables for your production environment
+2. Consider using Docker Compose for orchestrating the backend with other services:
+
+```yaml
+# docker-compose.yml
+version: '3'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=your_production_mongodb_uri
+      - CLOUDINARY_CLOUD_NAME=your_cloud_name
+      - CLOUDINARY_API_KEY=your_api_key
+      - CLOUDINARY_API_SECRET=your_api_secret
+      - PORT=5000
+    restart: always
+```
+
+3. Start the services:
+   ```bash
+   docker-compose up -d
+   ```
 
 ### Mobile App Deployment
 Build the Flutter app for release:
